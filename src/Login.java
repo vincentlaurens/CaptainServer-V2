@@ -16,7 +16,7 @@ public class Login extends HttpServlet {
             result="../../../pages/technicien/repair-dashboard.html";
         }else {
             if (name.equals("admin") && password.equals("passadmin")) {
-                result = "../../../pages/admin-dashboard.html";
+                result = "../../../pages/admin/admin-dashboard.html";
             } else {
                 if (name.equals("user") && password.equals("passuser")) {
                     result = "../../../pages/user-dashboard.html";
