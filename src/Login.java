@@ -1,3 +1,5 @@
+import connexion.ManagerDBB;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +22,7 @@ public class Login extends HttpServlet {
             ManagerDBB connexionDBB = new ManagerDBB();
             Connection conn = connexionDBB.connexion();
 
-            if(conn == null) {
+            if(conn == null && conn.isClosed()) {
                 response.sendError(500, "Exception sur l'accès à la BDD ");
             }else{
                 Statement stmt = conn.createStatement();
@@ -34,7 +36,7 @@ public class Login extends HttpServlet {
                         System.out.println(type);
                         switch (type){
                             case "admin":
-                                response.sendRedirect("../../../pages/admin/admin-dashboard.html");
+                                response.sendRedirect("../../../pages/admin/admin-dashboard.jsp");
                                 break;
                             case "user":
                                 response.sendRedirect("../../../pages/user-dashboard.html");

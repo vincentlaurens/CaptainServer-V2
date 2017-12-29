@@ -1,3 +1,4 @@
+package connexion;
 
 public class DataDBB {
     private final String url, user, passwd;
