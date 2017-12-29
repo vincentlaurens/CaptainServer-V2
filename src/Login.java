@@ -1,7 +1,4 @@
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.servlet.ServletException;
-import javax.servlet.UnavailableException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,13 +17,8 @@ public class Login extends HttpServlet {
 
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-
-            String url = "jdbc:mysql://localhost:3306/captainbdd";
-            String user = "root";
-            String passwd = "Bdd2017!";
-
-            Connection conn = DriverManager.getConnection(url, user, passwd);
+            ManagerDBB connexionDBB = new ManagerDBB();
+            Connection conn = connexionDBB.connexion();
 
             if(conn == null) {
                 response.sendError(500, "Exception sur l'accès à la BDD ");
@@ -59,7 +51,7 @@ public class Login extends HttpServlet {
                 }
 
             }
-            conn.close();
+            connexionDBB.closeDBB();
         } catch (Exception e1) {
             e1.printStackTrace();
         }
