@@ -80,7 +80,7 @@
 
         </div>
         <div class ="navbar-right">
-            <a class="logout" href="../login/login.jsp"><i class="fa fa-sign-out fa-fw"></i>Déconnexion</a>
+            <a class="logout" href="../../index.jsp"><i class="fa fa-sign-out fa-fw"></i>Déconnexion</a>
             <img src="../../ressource/logo_edison_ways.png" style="margin-right: 20px" height="50">
         </div>
         <!-- /.navbar-header -->

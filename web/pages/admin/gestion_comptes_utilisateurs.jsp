@@ -75,27 +75,27 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="user-dashboard.html">Captain</a>
+            <a class="navbar-brand" href="user-dashboard.jsp">Captain</a>
 
         </div>
         <div class ="navbar-right">
-            <a class="logout" href="../login/login.html"><i class="fa fa-sign-out fa-fw"></i>Déconnexion</a>
+            <a class="logout" href="../../index.jsp"><i class="fa fa-sign-out fa-fw"></i>Déconnexion</a>
             <img src="../../ressource/logo_edison_ways.png" style="margin-right: 20px" height="50">
         </div>
         <!-- /.navbar-header -->
 
         <ul class="nav navbar-top-links navbar-left">
             <li class="navbar-link active ">
-                <a class="link " href="admin-dashboard.html"><i class="fa fa-dashboard"></i> Tableau de bord</a>
+                <a class="link " href="admin-dashboard.jsp"><i class="fa fa-dashboard"></i> Tableau de bord</a>
             </li>
             <li class="navbar-link">
-                <a class="link"  href="gestion_comptes_utilisateurs.html"><i class="fa fa-gear"></i> Paramètres de Compte</a>
+                <a class="link"  href="gestion_comptes_utilisateurs.jsp"><i class="fa fa-gear"></i> Paramètres de Compte</a>
             </li>
             <li class="navbar-link">
-                <a class="link"  href="gestion_categories.html"><i class="fa fa-folder-open"></i> Gestion des Catégories</a>
+                <a class="link"  href="gestion_categories.jsp"><i class="fa fa-folder-open"></i> Gestion des Catégories</a>
             </li>
             <li class="navbar-link">
-                <a class="link"  href="etat_reseau.html"><i class="fa fa-bolt"></i> Gestion du Réseau</a>
+                <a class="link"  href="etat_reseau.jsp"><i class="fa fa-bolt"></i> Gestion du Réseau</a>
             </li>
 
         </ul>
@@ -263,36 +263,36 @@
                         <a href="#" class="close" data-dismiss="alert" aria-label="close" onclick="closeOption(event, 'Plus')">×</a>
                     </div>
                     <div class="panel-body">
-                        <form role="form">
+                        <form role="form" action="AddAccount" method="post">
                             <fieldset>
                                 <div class="form-group">
                                     <h1>Nouvel Utilisateur</h1>
                                 </div>
                                 <div class="form-group has-success">
                                     <label class="control-label">Nouveau login</label>
-                                    <input type="text" class="form-control" id="nouveauLoginAjouter">
+                                    <input type="text" class="form-control" id="nouveauLoginAjouter" name="nouveauLoginAjouter">
                                 </div>
                                 <div class="form-group has-success">
                                     <label class="control-label" >Nouveau mot de passe</label>
-                                    <input type="text" class="form-control" id="nouveauMdPAjouter">
+                                    <input type="text" class="form-control" id="nouveauMdPAjouter" name = "nouveauMdPAjouter">
                                 </div>
                                 <div class="form-group has-success">
                                     <label class="control-label" >Confirmation nouveau mot de passe</label>
-                                    <input type="text" class="form-control" id="ConfirmationNouveauMdPAjouter">
+                                    <input type="text" class="form-control" id="ConfirmationNouveauMdPAjouter" name="ConfirmationNouveauMdPAjouter">
                                 </div>
                                 <div class="form-group">
 
                                     <label>Type de compte</label>
-                                    <select class="form-control">
-                                        <option>Utilisateur</option>
-                                        <option>Administrateur</option>
-                                        <option>Technicien</option>
+                                    <select class="form-control" id="nouveauTypeAjouter" name="nouveauTypeAjouter">
+                                        <option value="user">Utilisateur</option>
+                                        <option value="admin">Administrateur</option>
+                                        <option value="repair">Technicien</option>
                                     </select>
 
                                 </div>
                             </fieldset>
-                            <button type="submit" class="btn btn-default">Ajouter</button>
-                            <button type="reset" class="btn btn-default">Vider les champ</button>
+                            <input type="submit" class="btn btn-default" value="Ajouter"/>
+                            <input type="reset" class="btn btn-default" value="'Vider les champ"/>
                         </form>
                     </div>
                 </div>
@@ -424,6 +424,7 @@
         }
 
     }
+
 
     function closeOption(evt, optionName) {
         document.getElementById(optionName).style.display = "none";
