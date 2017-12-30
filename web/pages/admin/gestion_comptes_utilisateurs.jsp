@@ -153,8 +153,8 @@
                                 <td style="text-align:center" ><%out.print(password);%></td>
                                 <td style="text-align:center" ><%out.print(type);%></td>
                                 <td style="text-align:center">
-                                    <button type="button" class="btn btn-xs btn-info btn-circle" onclick="openOptionModifierOuSupprimmer(event, 'Modifier', 1)"><i class="fa fa fa-list"></i></button>
-                                    <button type="button" class="btn btn-xs btn-danger btn-circle" onclick="openOptionModifierOuSupprimmer(event, 'Moins', 1)"><i class="fa fa-minus"></i></button>
+                                    <button type="button" class="btn btn-xs btn-info btn-circle" onclick="openOptionModifierOuSupprimmer(event, 'Modifier', <%out.print(numligne);%>)"><i class="fa fa fa-list"></i></button>
+                                    <button type="button" class="btn btn-xs btn-danger btn-circle" onclick="openOptionModifierOuSupprimmer(event, 'Moins', <%out.print(numligne);%>)"><i class="fa fa-minus"></i></button>
                                 </td>
                             </tr>
                             <%
@@ -172,7 +172,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-7" id="container">
+        <div class="col-lg-3 col-lg-offset-1" id="container">
             <div class="row" id="Modifier" style="display: none;">
                 <div class="panel panel-info">
                     <div class="panel-heading" >Modifier un Compte Utilisateur
@@ -248,7 +248,6 @@
                                     </div>
                                 </fieldset>
                                 <button type="submit" class="btn btn-default" >Modifier</button>
-                                <button type="reset" class="btn btn-default">Vider les champ</button>
                             </form>
                         </div>
                     </div>
@@ -268,7 +267,6 @@
                                 <div class="form-group ">
                                     <label class="control-label">Nouveau login</label>
                                     <input  type="text" class="form-control" id="nouveauLoginAjouter" name="nouveauLoginAjouter" required>
-                                    <br />
                                 </div>
                                 <div class="form-group ">
                                     <label class="control-label" >Nouveau mot de passe</label>
@@ -302,28 +300,27 @@
                         <a href="#" class="close" data-dismiss="alert" aria-label="close" onclick="closeOption(event, 'Moins')">×</a>
                     </div>
                     <div class="panel-body">
-                        <form role="form">
+                        <form role="form" action="${pageContext.request.contextPath}/servlets/SupAccount" method="post">
                             <fieldset>
                                 <div class="form-group">
                                     <h1>Supprimer le compte suivant</h1>
                                 </div>
                                 <div class="form-group">
-                                    <label>Login à Supprimer</label>
-                                    <input class="form-control" id="loginAsupprimer" type="text" placeholder="Login a supprimer" disabled>
+                                    <label for="loginAsupprimer">Login à Supprimer</label>
+                                    <input class="form-control" id="loginAsupprimer" name="loginAsupprimer" type="text" placeholder="Login a supprimer" disabled>
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Mot de passe à Supprimer</label>
-                                    <input class="form-control" id="mdpAsupprimer" type="text" placeholder="Mot de Passe a supprimer" disabled>
+                                    <label for="mdpAsupprimer">Mot de passe à Supprimer</label>
+                                    <input class="form-control" id="mdpAsupprimer" name="mdpAsupprimer" type="text" placeholder="Mot de Passe a supprimer" disabled>
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Type de compte à Supprimer</label>
-                                    <input class="form-control" id="typeAsupprimer" type="text" placeholder="Type a supprimer" disabled>
+                                    <label for="typeAsupprimer">Type de compte à Supprimer</label>
+                                    <input class="form-control" id="typeAsupprimer" name="typeAsupprimer" type="text" placeholder="Type a supprimer" disabled>
                                 </div>
                             </fieldset>
-                            <button type="submit" class="btn btn-default">Supprimer</button>
-                            <button type="reset" class="btn btn-default">Vider les champ</button>
+                            <input type="submit" class="btn btn-default" value="Supprimer" onclick="return confirm('Confirmez-vous la suppression du compte ?')"/>
                         </form>
                     </div>
                 </div>

@@ -31,6 +31,8 @@ public class SupAccount extends HttpServlet {
         String mdpAsupprimer = request.getParameter("mdpAsupprimer");
         String typeAsupprimer = request.getParameter("typeAsupprimer");
 
+        System.out.println(loginAsupprimer);
+
 
         try {
             ManagerDBB connexionDBB = new ManagerDBB();
@@ -41,8 +43,8 @@ public class SupAccount extends HttpServlet {
                 erreurs.put("loginAsupprimer", message);
             } else {
                 assert conn != null;
-                Statement stmt = conn.createStatement();
-                String requete = String.format("DELETE FROM captainbdd.utilisateur WHERE loginutilisateur = '%s';", loginAsupprimer);
+                Statement stmt = conn.createStatement();String requete = String.format("DELETE FROM captainbdd.utilisateur WHERE loginutilisateur = '%s';", loginAsupprimer);
+                System.out.println(requete);
                 int requestResult = stmt.executeUpdate(requete);
                 if(requestResult<0){
                     String message = String.format("Requête de suppression du compte %s à échouée", loginAsupprimer);
