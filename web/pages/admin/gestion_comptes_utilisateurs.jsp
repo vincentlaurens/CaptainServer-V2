@@ -1,3 +1,5 @@
+<%--@elvariable id="resultat" type="java"--%>
+<%--@elvariable id="erreurs" type="java"--%>
 <%@ page import="java.sql.Connection" %>
 <%@ page import="connexion.ManagerDBB" %>
 <%@ page import="java.sql.Statement" %>
@@ -75,7 +77,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="user-dashboard.jsp">Captain</a>
+            <a class="navbar-brand" href="./user-dashboard.jsp">Captain</a>
 
         </div>
         <div class ="navbar-right">
@@ -120,6 +122,7 @@
                     <div class="table-responsive">
                         <table class="table table-responsive table-striped table-bordered table-hover" id="data">
                             <thead>
+                            <p style="color:${empty erreurs ? 'green' : 'red'}">${resultat}</p>
                             <tr id ="0">
                                 <th style="text-align:center" >Compte</th>
                                 <th style="text-align:center">Mot de Passe</th>
@@ -130,18 +133,12 @@
                             <tbody>
                             <%
                                 try{
-                                    System.out.println("conn = "+conn.isClosed());
+                                    System.out.println(" gestion_comptes : conn = "+conn.isClosed());
                                     if(conn !=null && conn.isClosed()){
                                         response.sendError(500, "Exception sur l'accès à la BDD ");
                                     }else {
                                         Statement stmt = conn.createStatement();
-                                        String requete = "SELECT loginutilisateur,password,type \n" +
-                                                "\tFROM captainbdd.utilisateur \n" +
-                                                "    WHERE loginutilisateur IS NOT NULL\n" +
-                                                "\t\tAND password IS NOT NULL\n" +
-                                                "\t\tAND type IS NOT NULL\n" +
-                                                "    GROUP BY type\n" +
-                                                "    ORDER BY loginutilisateur;";
+                                        String requete = "SELECT loginutilisateur,password,type FROM captainbdd.utilisateur WHERE loginutilisateur IS NOT NULL AND password IS NOT NULL AND type IS NOT NULL ORDER BY type ASC;";
                                         ResultSet requestResult = stmt.executeQuery(requete);
                                         if (requestResult != null) {
                                             int numligne = 0;
@@ -263,27 +260,28 @@
                         <a href="#" class="close" data-dismiss="alert" aria-label="close" onclick="closeOption(event, 'Plus')">×</a>
                     </div>
                     <div class="panel-body">
-                        <form role="form" action="AddAccount" method="post">
+                        <form role="form" action="${pageContext.request.contextPath}/servlets/Addcount" method="post">
                             <fieldset>
                                 <div class="form-group">
                                     <h1>Nouvel Utilisateur</h1>
                                 </div>
-                                <div class="form-group has-success">
+                                <div class="form-group ">
                                     <label class="control-label">Nouveau login</label>
-                                    <input type="text" class="form-control" id="nouveauLoginAjouter" name="nouveauLoginAjouter">
+                                    <input  type="text" class="form-control" id="nouveauLoginAjouter" name="nouveauLoginAjouter" required>
+                                    <br />
                                 </div>
-                                <div class="form-group has-success">
+                                <div class="form-group ">
                                     <label class="control-label" >Nouveau mot de passe</label>
-                                    <input type="text" class="form-control" id="nouveauMdPAjouter" name = "nouveauMdPAjouter">
+                                    <input type="text" class="form-control" id="nouveauMdPAjouter" name = "nouveauMdPAjouter" required>
                                 </div>
-                                <div class="form-group has-success">
+                                <div class="form-group">
                                     <label class="control-label" >Confirmation nouveau mot de passe</label>
-                                    <input type="text" class="form-control" id="ConfirmationNouveauMdPAjouter" name="ConfirmationNouveauMdPAjouter">
+                                    <input type="text" class="form-control" id="ConfirmationNouveauMdPAjouter" name="ConfirmationNouveauMdPAjouter" required>
                                 </div>
                                 <div class="form-group">
 
                                     <label>Type de compte</label>
-                                    <select class="form-control" id="nouveauTypeAjouter" name="nouveauTypeAjouter">
+                                    <select class="form-control" id="nouveauTypeAjouter" name="nouveauTypeAjouter" required>
                                         <option value="user">Utilisateur</option>
                                         <option value="admin">Administrateur</option>
                                         <option value="repair">Technicien</option>
@@ -291,8 +289,9 @@
 
                                 </div>
                             </fieldset>
+
                             <input type="submit" class="btn btn-default" value="Ajouter"/>
-                            <input type="reset" class="btn btn-default" value="'Vider les champ"/>
+                            <input type="reset" class="btn btn-default" value="Vider les champ"/>
                         </form>
                     </div>
                 </div>

@@ -43,13 +43,13 @@
                     <h3 class="panel-title">Veuillez vous connecter</h3>
                 </div>
                 <div class="panel-body">
-                    <form action="Login" method="post" role="form">
+                    <form action="${pageContext.request.contextPath}/servlets/Login" method="post" role="form">
                         <fieldset>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Login" name="login" type="text">
+                                <input class="form-control" placeholder="Login" name="login" type="text" required>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Password" name="password" type="password">
+                                <input class="form-control" placeholder="Password" name="password" type="password" required>
                             </div>
                             <div class="checkbox">
                                 <label>

@@ -128,20 +128,16 @@
                                 <tbody>
                                 <%
                                     try{
-                                        System.out.println("conn = "+conn.isClosed());
+                                        System.out.println("admin-dashboard : conn = "+conn.isClosed());
                                         if(conn !=null && conn.isClosed()){
                                             response.sendError(500, "Exception sur l'accès à la BDD ");
                                         }else {
                                             Statement stmt = conn.createStatement();
-                                            String requete = "SELECT loginutilisateur,password,type \n" +
-                                                    "\tFROM captainbdd.utilisateur \n" +
-                                                    "    WHERE loginutilisateur IS NOT NULL\n" +
-                                                    "\t\tAND password IS NOT NULL\n" +
-                                                    "\t\tAND type IS NOT NULL\n" +
-                                                    "    GROUP BY type\n" +
-                                                    "    ORDER BY loginutilisateur;";
+                                            String requete = "SELECT loginutilisateur,password,type FROM captainbdd.utilisateur WHERE loginutilisateur IS NOT NULL AND password IS NOT NULL AND type IS NOT NULL ORDER BY type ASC;";
+                                            System.out.println(requete);
                                             ResultSet requestResult = stmt.executeQuery(requete);
                                             if (requestResult != null) {
+
                                                 while(requestResult.next()) {
                                                     String login = requestResult.getString(1);
                                                     String password = requestResult.getString(2);
