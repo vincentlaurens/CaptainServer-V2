@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
@@ -28,22 +27,20 @@ public class SupAccount extends HttpServlet {
         Map<String, String> erreurs = new HashMap<>();
 
         String loginAsupprimer = request.getParameter("loginAsupprimer");
-        String mdpAsupprimer = request.getParameter("mdpAsupprimer");
-        String typeAsupprimer = request.getParameter("typeAsupprimer");
-
-        System.out.println(loginAsupprimer);
 
 
         try {
             ManagerDBB connexionDBB = new ManagerDBB();
             Connection conn = connexionDBB.connexion();
+            System.out.println("SupAccount : "+conn);
 
             if (conn != null && conn.isClosed()) {
                 String message = "Exception sur l'accès à la BDD ";
                 erreurs.put("loginAsupprimer", message);
             } else {
                 assert conn != null;
-                Statement stmt = conn.createStatement();String requete = String.format("DELETE FROM captainbdd.utilisateur WHERE loginutilisateur = '%s';", loginAsupprimer);
+                Statement stmt = conn.createStatement();
+                String requete = String.format("DELETE FROM captainbdd.utilisateur WHERE loginutilisateur = '%s';", loginAsupprimer);
                 System.out.println(requete);
                 int requestResult = stmt.executeUpdate(requete);
                 if(requestResult<0){
@@ -58,7 +55,7 @@ public class SupAccount extends HttpServlet {
 
         if (erreurs.isEmpty()) {
 
-            resultat = String.format("Suppression du comte %s, %s, %s", loginAsupprimer,mdpAsupprimer,typeAsupprimer);
+            resultat = String.format("Suppression du compte %s", loginAsupprimer);
 
         } else {
 
@@ -76,6 +73,7 @@ public class SupAccount extends HttpServlet {
         /* Transmission de la paire d'objets request/response à notre JSP */
 
         this.getServletContext().getRequestDispatcher(CHEMIN).forward(request, response);
+        response.sendRedirect(CHEMIN);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

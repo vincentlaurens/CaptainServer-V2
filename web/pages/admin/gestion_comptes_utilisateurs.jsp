@@ -180,18 +180,18 @@
                     </div>
                     <div class="panel-body">
                         <div class="row">
-                            <form role="form">
+                            <form role="form" method="post" action="${pageContext.request.contextPath}/servlets/ModifyAccount">
                                 <fieldset id="choixmodif">
 
                                     <label>choix modification paramètres compte</label>
                                     <label class="radio-inline">
-                                        <input name="optionsRadioInline" id="optionsRadioInline1" value="option1" onchange="openChoix()" type="radio">login
+                                        <input name="optionsRadioInline" id="optionsRadioInline1" value="login" onchange="openChoix()" type="radio">login
                                     </label>
                                     <label class="radio-inline">
-                                        <input name="optionsRadioInline" id="optionsRadioInline2" value="option2" onchange="openChoix()" type="radio">mot de passe
+                                        <input name="optionsRadioInline" id="optionsRadioInline2" value="mdp" onchange="openChoix()" type="radio">mot de passe
                                     </label>
                                     <label class="radio-inline">
-                                        <input name="optionsRadioInline" id="optionsRadioInline3" value="option3" onchange="openChoix()" type="radio">type
+                                        <input name="optionsRadioInline" id="optionsRadioInline3" value="type" onchange="openChoix()" type="radio">type
                                     </label>
 
                                 </fieldset>
@@ -201,15 +201,15 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Ancien login</label>
-                                        <input class="form-control" id="ancienLogin" type="text" placeholder="Ancien login" disabled>
+                                        <input class="form-control" id="ancienLogin" name="ancienLogin" type="text" placeholder="Ancien login" readonly>
                                     </div>
                                     <div class="form-group has-success">
                                         <label class="control-label">Nouveau login</label>
-                                        <input type="text" class="form-control" id="nouveauLogin">
+                                        <input type="text" class="form-control" id="nouveauLogin" name="nouveauLogin">
                                     </div>
                                     <div class="form-group has-success">
                                         <label class="control-label" >Confirmation du nouveau login</label>
-                                        <input type="text" class="form-control" id="ConfirmationNouveauLogin">
+                                        <input type="text" class="form-control" id="ConfirmationNouveauLogin" name="ConfirmationNouveauLogin">
                                     </div>
                                 </fieldset>
                                 <fieldset id="modifierMdp">
@@ -218,15 +218,15 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Ancien mot de passe</label>
-                                        <input class="form-control" id="ancienMdP" type="text" placeholder="Ancien mot de passe" disabled >
+                                        <input class="form-control" id="ancienMdP" name="ancienMdP" type="text" placeholder="Ancien mot de passe" readonly >
                                     </div>
                                     <div class="form-group has-success">
                                         <label class="control-label" >Nouveau mot de passe</label>
-                                        <input type="text" class="form-control" id="nouveauMdP">
+                                        <input type="text" class="form-control" id="nouveauMdP" name="nouveauMdP">
                                     </div>
                                     <div class="form-group has-success">
                                         <label class="control-label">Confirmation du nouveau mot de passe</label>
-                                        <input type="text" class="form-control" id="confirmationNouveauMdP">
+                                        <input type="text" class="form-control" id="confirmationNouveauMdP" name="confirmationNouveauMdP">
                                     </div>
                                 </fieldset>
                                 <fieldset id="modifierType">
@@ -236,18 +236,18 @@
                                     <div class="form-group">
                                         <div class="form-group">
                                             <label>Ancien type</label>
-                                            <input class="form-control" id="ancienType" type="text" placeholder="Ancien type" disabled >
+                                            <input class="form-control" id="ancienType" name="ancienType" type="text" placeholder="Ancien type" readonly >
                                         </div>
                                         <label>nouveau type de compte</label>
-                                        <select class="form-control">
-                                            <option>Utilisateur</option>
-                                            <option>Administrateur</option>
-                                            <option>Technicien</option>
+                                        <select  class="form-control" id="nouveauTypeModif" name="nouveauTypeModif" required>
+                                            <option value="user">Utilisateur</option>
+                                            <option value="admin">Administrateur</option>
+                                            <option value="repair">Technicien</option>
                                         </select>
 
                                     </div>
                                 </fieldset>
-                                <button type="submit" class="btn btn-default" >Modifier</button>
+                                <button type="submit" class="btn btn-default" onclick="return confirm('Confirmez-vous la modification du compte ?');">Modifier</button>
                             </form>
                         </div>
                     </div>
@@ -300,27 +300,27 @@
                         <a href="#" class="close" data-dismiss="alert" aria-label="close" onclick="closeOption(event, 'Moins')">×</a>
                     </div>
                     <div class="panel-body">
-                        <form role="form" action="${pageContext.request.contextPath}/servlets/SupAccount" method="post">
+                        <form role="form"  method="post" action="${pageContext.request.contextPath}/servlets/SupAccount" id="formSupAccount">
                             <fieldset>
                                 <div class="form-group">
                                     <h1>Supprimer le compte suivant</h1>
                                 </div>
                                 <div class="form-group">
                                     <label for="loginAsupprimer">Login à Supprimer</label>
-                                    <input class="form-control" id="loginAsupprimer" name="loginAsupprimer" type="text" placeholder="Login a supprimer" disabled>
+                                    <input class="form-control" id="loginAsupprimer" name="loginAsupprimer" type="text" placeholder="Login a supprimer" readonly>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="mdpAsupprimer">Mot de passe à Supprimer</label>
-                                    <input class="form-control" id="mdpAsupprimer" name="mdpAsupprimer" type="text" placeholder="Mot de Passe a supprimer" disabled>
+                                    <input class="form-control" id="mdpAsupprimer" name="mdpAsupprimer" type="text" placeholder="Mot de Passe a supprimer" readonly>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="typeAsupprimer">Type de compte à Supprimer</label>
-                                    <input class="form-control" id="typeAsupprimer" name="typeAsupprimer" type="text" placeholder="Type a supprimer" disabled>
+                                    <input class="form-control" id="typeAsupprimer" name="typeAsupprimer" type="text" placeholder="Type a supprimer" readonly>
                                 </div>
                             </fieldset>
-                            <input type="submit" class="btn btn-default" value="Supprimer" onclick="return confirm('Confirmez-vous la suppression du compte ?')"/>
+                            <input type="submit" class="btn btn-default" value="Supprimer" onclick="return confirm('Confirmez-vous la suppression du compte ?');"/>
                         </form>
                     </div>
                 </div>
