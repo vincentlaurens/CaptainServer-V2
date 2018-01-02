@@ -6,6 +6,30 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%!
+    private HttpSession session;
+%>
+<%
+    String username= (String) session.getAttribute("nomUtilisateur");
+    String type= (String) session.getAttribute("typeUtilisateur");
+
+    if(username.isEmpty()){
+       response.sendRedirect("index.jsp");
+    }else{
+        switch (type) {
+            case "admin":
+                response.sendRedirect("../../../pages/admin/admin-dashboard.jsp");
+                break;
+            case "user":
+                response.sendRedirect("../../../pages/user-dashboard.html");
+                break;
+            case "repair":
+                response.sendRedirect("../../../pages/technicien/repair-dashboard.html");
+                break;
+        }
+
+    }
+%>
 <html>
 <head>
     <meta charset="utf-8">

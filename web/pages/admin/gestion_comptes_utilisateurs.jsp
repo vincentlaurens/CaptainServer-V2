@@ -16,8 +16,11 @@
 <%!
     private ManagerDBB connexionDBB;
     private Connection conn;
+    private HttpSession session;
 %><%
+    String username= (String) session.getAttribute("nomUtilisateur");
     try {
+
         connexionDBB  = new ManagerDBB();
         conn = connexionDBB.connexion();
     }catch (Exception e) {
@@ -77,7 +80,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="./user-dashboard.jsp">Captain</a>
+            <a class="navbar-brand" href="user-dashboard.jsp">Captain |</a>
+            <a class="navbar-brand" href="user-dashboard.jsp"><%out.print(username);%></a>
 
         </div>
         <div class ="navbar-right">

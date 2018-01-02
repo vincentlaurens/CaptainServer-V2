@@ -100,8 +100,7 @@ public class AddAccount extends HttpServlet {
         /* Transmission de la paire d'objets request/response à notre JSP */
 
         this.getServletContext().getRequestDispatcher(CHEMIN).forward(request, response);
-        response.sendRedirect(CHEMIN);
-    }
+        response.sendRedirect(CHEMIN);    }
 
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         this.getServletContext().getRequestDispatcher( CHEMIN ).forward( request, response );
